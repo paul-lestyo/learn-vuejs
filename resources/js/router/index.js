@@ -5,6 +5,9 @@ import NewNote from '../views/notes/Create';
 import TableOfNote from '../views/notes/Table';
 import ShowNote from '../views/notes/Show';
 import EditNote from '../views/notes/Edit';
+import Register from '../views/auth/Register';
+import Login from '../views/auth/Login';
+import Profile from '../views/auth/Profile';
 
 export default {
 	mode: 'history',
@@ -14,6 +17,21 @@ export default {
 			path: '/',
 			name: 'home',
 			component: Home
+		},
+		{
+			path: '/login',
+			name: 'login', 
+			component: Login
+		},
+		{
+			path: '/register',
+			name: 'register', 
+			component: Register
+		},
+		{
+			path: '/profile',
+			name: 'profile', 
+			component: Profile
 		},
 		{
 			path: '/about',

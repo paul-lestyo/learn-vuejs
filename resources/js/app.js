@@ -16,6 +16,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Toasted from 'vue-toasted';
 import routes from './router';
+import store from './vuex';
 
 Vue.use(Toasted);
 Vue.use(VueRouter);
@@ -24,4 +25,5 @@ Vue.component('navigation', require('./components/Navigation.vue').default);
 const app = new Vue({
     el: '#app',
 	router: new VueRouter(routes),
+	store
 });
