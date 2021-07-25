@@ -34,15 +34,15 @@
                 </div>
               </div>
 			  <div class="form-group">
-                <label for="password">Password Confirmation</label>
+                <label for="password_confirm">Password Confirmation</label>
                 <input
                   type="password"
                   v-model="form.password_confirmation"
-                  id="password"
+                  id="password_confirm"
                   class="form-control"
                   placeholder="Password Confirmation"
                 />
-                <div v-if="theErrors.password" class="mt-2 text-danger">
+                <div v-if="theErrors.password_confirmation" class="mt-2 text-danger">
                   {{ theErrors.password_confirmation[0] }}
                 </div>
               </div>
@@ -65,17 +65,23 @@
 export default {
   data() {
     return {
-      form: {
-        username: "",
-        password: "",
-      },
+      form: {},
       loading: false,
       theErrors: [],
     };
   },
 
-  mounted() {},
-
-  methods: {},
+  methods: {
+	   async register() {
+		  try {
+			  let response = await this.$store.dispatch('register', this.form)
+			  if(response.status === 201) {
+				  this.$router.push({ name: 'login' })
+			  }
+		  } catch (error) {
+			  this.theErrors = error.response.data.errors
+		  }
+	  }
+  },
 };
 </script>

@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Notes\NoteController;
 use App\Http\Controllers\Notes\SubjectController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/user', [AuthController::class, 'user']);
 
 Route::prefix('notes')->group(function() {
 	Route::get('', [NoteController::class, 'index']);

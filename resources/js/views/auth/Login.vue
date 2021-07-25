@@ -36,25 +36,20 @@
 export default {
   data() {
     return {
-      form: {
-        username: "",
-        password: "",
-      },
+      form: {},
       loading: false,
       theErrors: [],
     };
   },
-
-  mounted() {},
-
+  
   methods: {
-	  async login() {
+	   async login() {
 		  try {
-			  let response = this.$store.dispatch('login', this.form)
-			  console.log(response)
-			  this.$router.push({ name: 'profile' })
+			  let response = await this.$store.dispatch('login', this.form)
+			  if(response.status === 200) {
+				  this.$router.push({ name: 'profile' })
+			  }
 		  } catch (error) {
-			  console.log(error);
 			  this.theErrors = error.response.data.errors
 		  }
 	  }

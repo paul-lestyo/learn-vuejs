@@ -21,17 +21,26 @@ export default {
 		{
 			path: '/login',
 			name: 'login', 
-			component: Login
+			component: Login,
+			meta: {
+				guest: true
+			}
 		},
 		{
 			path: '/register',
 			name: 'register', 
-			component: Register
+			component: Register,
+			meta: {
+				guest: true
+			}
 		},
 		{
 			path: '/profile',
 			name: 'profile', 
-			component: Profile
+			component: Profile,
+			meta: {
+				auth: true
+			}
 		},
 		{
 			path: '/about',

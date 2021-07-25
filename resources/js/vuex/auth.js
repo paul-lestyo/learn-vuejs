@@ -1,18 +1,19 @@
 import axios from "axios"
+import { setHeaderToken, removeHeaderToken } from './../utils/auth'
 
 export default {
 	state: {
 		user: null,
 		isLoggedIn: false,
 	},
-	mutation: {
+	mutations: {
 		set_user(state, data) {
-			state.user = data,
+			state.user = data
 			state.isLoggedIn = true
 		},
 
 		reset_user(state) {
-			state.user = null,
+			state.user = null
 			state.isLoggedIn = false
 		}
 	},
@@ -28,13 +29,15 @@ export default {
 	actions: {
 		login({ dispatch, commit }, data) {
 			return new Promise((resolve, reject) => {
-				axios.post('login', data)
+				axios.post('/api/login', data)
 				.then(response => {
 					const token = response.data.token
 					localStorage.setItem('token', token)
 					setHeaderToken(token)
 					dispatch('get_user')
-					resolve(response)
+					.then(() => {
+						resolve(response)
+					})
 				})
 				.catch(err => {
 					commit('reset_user')
@@ -44,12 +47,34 @@ export default {
 			})
 		},
 
+		register({ commit }, data) {
+			return new Promise((resolve, reject) => { 
+			 axios.post('/api/register', data)
+			  .then(response => { 
+			   resolve(response)
+			  })
+			  .catch(err => {
+			   commit('reset_user')   
+			   reject(err)
+			  })
+			})
+		},
+		
+		logout({ commit }) {
+			return new Promise((resolve) => {
+				commit('reset_user')
+				localStorage.removeItem('token')
+				removeHeaderToken()
+				resolve()
+			})
+		},
+
 		async get_user({commit}) {
 			if(!localStorage.getItem('token')) {
 				return
 			}
 			try {
-				let response = await axios.get('user')
+				let response = await axios.get('/api/user')
 				commit('set_user', response.data.data)
 			} catch(error) {
 				commit('reset_user')

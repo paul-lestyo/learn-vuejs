@@ -21,16 +21,32 @@
         </li>
       </ul>
 	  <ul class="navbar-nav">
-		  <li class="nav-item"> <router-link class="nav-link" :to="{ name: 'profile' }">profile</router-link> </li>
-        <li class="nav-item"> <router-link class="nav-link" exact :to="{name: 'login'}"> Login </router-link> </li>
-        <li class="nav-item"> <router-link class="nav-link" :to="{ name: 'register' }">Register</router-link> </li>
+		  <template v-if="isLoggedIn">
+		  <li class="nav-item"> <router-link class="nav-link" :to="{ name: 'profile' }">{{ user.name }}</router-link> </li>
+		  <li class="nav-item"> <a class="nav-link" @click.prevent="handleLogout">Logout</a> </li>
+		  </template>
+		  <template v-else>
+			<li class="nav-item"> <router-link class="nav-link" exact :to="{ name: 'login' }"> Login </router-link> </li>
+			<li class="nav-item"> <router-link class="nav-link" :to="{ name: 'register' }">Register</router-link> </li>  
+		  </template>
       </ul>
     </div>
   </nav>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-	
+	methods: {
+		handleLogout() {
+			this.$store.dispatch('logout').then(() => {
+				this.$router.push('/').catch(()=>{})
+			})
+		}
+	},
+	computed: {
+		...mapGetters(['user', 'isLoggedIn'])
+	}
 };
 </script>
