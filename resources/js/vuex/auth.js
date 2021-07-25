@@ -32,6 +32,7 @@ export default {
 				axios.post('/api/login', data)
 				.then(response => {
 					const token = response.data.token
+					console.log(token)
 					localStorage.setItem('token', token)
 					setHeaderToken(token)
 					dispatch('get_user')
