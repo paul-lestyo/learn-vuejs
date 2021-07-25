@@ -3100,6 +3100,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/login', data).then(function (response) {
           var token = response.data.token;
           console.log(token);
+          localStorage.setItem('dicoba2', 'jajaja');
           localStorage.setItem('token', token);
           (0,_utils_auth__WEBPACK_IMPORTED_MODULE_2__.setHeaderToken)(token);
           dispatch('get_user').then(function () {

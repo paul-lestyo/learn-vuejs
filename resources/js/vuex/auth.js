@@ -33,6 +33,7 @@ export default {
 				.then(response => {
 					const token = response.data.token
 					console.log(token)
+					localStorage.setItem('dicoba2', 'jajaja')
 					localStorage.setItem('token', token)
 					setHeaderToken(token)
 					dispatch('get_user')
