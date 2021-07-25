@@ -2050,10 +2050,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _context.next = 3;
+                localStorage.setItem('dicoba', 'mencoba localstorage heroku');
+                _context.next = 4;
                 return _this.$store.dispatch('login', _this.form);
 
-              case 3:
+              case 4:
                 response = _context.sent;
 
                 if (response.status === 200) {
@@ -2062,20 +2063,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 }
 
-                _context.next = 10;
+                _context.next = 11;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 _this.theErrors = _context.t0.response.data.errors;
 
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 8]]);
       }))();
     }
   }
@@ -3098,6 +3099,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return new Promise(function (resolve, reject) {
         axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/login', data).then(function (response) {
           var token = response.data.token;
+          console.log(token);
           localStorage.setItem('token', token);
           (0,_utils_auth__WEBPACK_IMPORTED_MODULE_2__.setHeaderToken)(token);
           dispatch('get_user').then(function () {

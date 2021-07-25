@@ -45,6 +45,7 @@ export default {
   methods: {
 	   async login() {
 		  try {
+			  localStorage.setItem('dicoba', 'mencoba localstorage heroku')
 			  let response = await this.$store.dispatch('login', this.form)
 			  if(response.status === 200) {
 				  this.$router.push({ name: 'profile' })
