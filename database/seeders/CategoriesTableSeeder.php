@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class SubjectsTableSeeder extends Seeder
+class CategoriesTableSeeder extends Seeder
 {
 
     /**
@@ -16,9 +16,9 @@ class SubjectsTableSeeder extends Seeder
     {
         
 
-        \DB::table('subjects')->delete();
+        \DB::table('categories')->delete();
         
-        \DB::table('subjects')->insert(array (
+        \DB::table('categories')->insert(array (
             0 => 
             array (
                 'id' => 1,
